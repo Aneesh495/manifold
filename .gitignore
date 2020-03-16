@@ -1,0 +1,20 @@
+# Build artifacts
+obj/
+bin/
+*.o
+*.a
+*.so
+*.dylib
+*.out
+
+# Editor and OS
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Temporary test logs and pcaps
+/tmp/
+*.pcap
+*.pcapng
