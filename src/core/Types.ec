@@ -8,15 +8,8 @@
 #include <stdio.h>
 
 #include "types.eh"
+#include "core.eh"
 #include "ec_runtime.h"
-
-// Safe byte buffer with dynamic capacity expansion and bound checks
-typedef struct ByteBuffer
-{
-   uint8_t* rawData;
-   uint32_t length;
-   uint32_t capacity;
-} ByteBuffer;
 
 void byte_buffer_init(ByteBuffer* buf, uint32_t initialCap)
 {

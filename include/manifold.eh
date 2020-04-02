@@ -5,6 +5,7 @@
 #define MANIFOLD_EH
 
 #include "types.eh"
+#include "core.eh"
 #include "can.eh"
 #include "isotp.eh"
 #include "uds.eh"

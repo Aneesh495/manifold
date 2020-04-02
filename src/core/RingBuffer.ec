@@ -7,22 +7,8 @@
 #include <string.h>
 
 #include "types.eh"
+#include "core.eh"
 #include "ec_runtime.h"
-
-#define RING_BUFFER_DEFAULT_CAPACITY 512
-
-typedef struct RingBuffer
-{
-   void** slots;
-   uint32_t capacity;
-   uint32_t head;
-   uint32_t tail;
-   uint32_t count;
-   uint64_t totalEnqueued;
-   uint64_t totalDequeued;
-   uint64_t overrunCount;
-   uint32_t peakWatermark;
-} RingBuffer;
 
 RingBuffer* ring_buffer_create(uint32_t capacity)
 {
@@ -62,7 +48,7 @@ bool ring_buffer_push(RingBuffer* rb, void* item)
    if(rb->count >= rb->capacity)
    {
       rb->overrunCount++;
-      return false; // Queue is full, drop frame or signal overrun
+      return false;
    }
 
    rb->slots[rb->head] = item;
