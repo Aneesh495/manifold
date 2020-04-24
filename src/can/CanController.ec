@@ -10,48 +10,6 @@
 #include "can.eh"
 #include "ec_runtime.h"
 
-#define CAN_CONTROLLER_MAX_MAILBOXES 32
-#define CAN_CONTROLLER_MAX_FILTERS   16
-
-typedef enum MailboxType
-{
-   MAILBOX_TYPE_UNUSED = 0,
-   MAILBOX_TYPE_RX     = 1,
-   MAILBOX_TYPE_TX     = 2
-} MailboxType;
-
-typedef struct CanFilter
-{
-   bool isActive;
-   bool isExtended;
-   uint32_t filterId;
-   uint32_t filterMask;
-} CanFilter;
-
-typedef struct CanMailbox
-{
-   MailboxType type;
-   CanFrame frame;
-   bool isPending;
-   bool isLocked;
-   uint32_t priority;
-} CanMailbox;
-
-typedef struct CanController
-{
-   uint32_t controllerId;
-   CanControllerState state;
-   uint8_t tec;               // Transmit Error Counter
-   uint8_t rec;               // Receive Error Counter
-   uint32_t errorFrames;
-   uint32_t busOffCount;
-   uint32_t busOffRecoveryCounter;
-   CanMailbox mailboxes[CAN_CONTROLLER_MAX_MAILBOXES];
-   CanFilter filters[CAN_CONTROLLER_MAX_FILTERS];
-   uint32_t totalTransmitted;
-   uint32_t totalReceived;
-} CanController;
-
 void can_controller_init(CanController* ctrl, uint32_t id)
 {
    if(!ctrl) return;
@@ -81,7 +39,6 @@ bool can_controller_matches_filter(const CanController* ctrl, const CanFrame* fr
 {
    if(!ctrl || !frame) return false;
 
-   // If no filters are defined, accept all frames
    bool anyFilter = false;
    for(int i = 0; i < CAN_CONTROLLER_MAX_FILTERS; i++)
    {
@@ -101,7 +58,6 @@ bool can_controller_matches_filter(const CanController* ctrl, const CanFrame* fr
    return !anyFilter;
 }
 
-// Submits a frame to an available Tx mailbox
 bool can_controller_send_frame(CanController* ctrl, const CanFrame* frame)
 {
    if(!ctrl || !frame || ctrl->state == CAN_STATE_BUS_OFF) return false;
@@ -114,7 +70,6 @@ bool can_controller_send_frame(CanController* ctrl, const CanFrame* frame)
          ctrl->mailboxes[i].isPending = true;
          ctrl->totalTransmitted++;
 
-         // Decrement TEC on successful transmission per ISO 11898-1
          if(ctrl->tec > 0) ctrl->tec--;
          return true;
       }
@@ -122,14 +77,13 @@ bool can_controller_send_frame(CanController* ctrl, const CanFrame* frame)
    return false;
 }
 
-// Ingests an incoming frame into an matching Rx mailbox
 bool can_controller_receive_frame(CanController* ctrl, const CanFrame* frame)
 {
    if(!ctrl || !frame || ctrl->state == CAN_STATE_BUS_OFF) return false;
 
    if(!can_controller_matches_filter(ctrl, frame))
    {
-      return false; // Filtered out
+      return false;
    }
 
    for(int i = 0; i < CAN_CONTROLLER_MAX_MAILBOXES; i++)
@@ -140,7 +94,6 @@ bool can_controller_receive_frame(CanController* ctrl, const CanFrame* frame)
          ctrl->mailboxes[i].isPending = true;
          ctrl->totalReceived++;
 
-         // Decrement REC on successful receive
          if(ctrl->rec > 0) ctrl->rec--;
          return true;
       }
@@ -148,16 +101,14 @@ bool can_controller_receive_frame(CanController* ctrl, const CanFrame* frame)
    return false;
 }
 
-// Simulates transmission or bus errors and evaluates ISO 11898-1 state machine
 void can_controller_record_tx_error(CanController* ctrl)
 {
    if(!ctrl || ctrl->state == CAN_STATE_BUS_OFF) return;
 
    ctrl->errorFrames++;
-   if(ctrl->tec <= 247) ctrl->tec += 8;
-   else ctrl->tec = 255;
+   ctrl->tec += 8;
 
-   if(ctrl->tec >= 256 || ctrl->tec == 255)
+   if(ctrl->tec >= 256)
    {
       ctrl->state = CAN_STATE_BUS_OFF;
       ctrl->busOffCount++;
@@ -174,7 +125,7 @@ void can_controller_record_rx_error(CanController* ctrl)
    if(!ctrl || ctrl->state == CAN_STATE_BUS_OFF) return;
 
    ctrl->errorFrames++;
-   if(ctrl->rec <= 254) ctrl->rec++;
+   ctrl->rec++;
 
    if(ctrl->rec >= 128 && ctrl->state == CAN_STATE_ERROR_ACTIVE)
    {
@@ -182,7 +133,6 @@ void can_controller_record_rx_error(CanController* ctrl)
    }
 }
 
-// Evaluates bus-off recovery event (128 occurrences of 11 consecutive recessive bits)
 bool can_controller_recover_bus_off(CanController* ctrl)
 {
    if(!ctrl || ctrl->state != CAN_STATE_BUS_OFF) return false;
@@ -194,7 +144,7 @@ bool can_controller_recover_bus_off(CanController* ctrl)
       ctrl->tec = 0;
       ctrl->rec = 0;
       ctrl->busOffRecoveryCounter = 0;
-      return true; // Successfully recovered
+      return true;
    }
    return false;
 }
