@@ -50,7 +50,7 @@ bool isotp_tx_start(IsoTpChannel* chan, const uint8_t* payload, uint32_t length)
 // Polls the transmitter to generate the next CAN frame (SF, FF, or CF)
 bool isotp_tx_poll(IsoTpChannel* chan, uint64_t currentMs, CanFrame* outFrame, bool* frameReady)
 {
-   if(!chan || !outFrame || !frameReady) return false;
+   if(!chan || !outFrame || !frameReady) return false; (void)currentMs;
    *frameReady = false;
 
    if(chan->state != ISOTP_STATE_SENDING) return true;

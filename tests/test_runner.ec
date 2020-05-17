@@ -19,6 +19,10 @@ bool test_can_controller_filters_and_errors(void);
 bool test_can_transceiver_and_arbitration(void);
 bool test_lin_pid_and_checksum(void);
 
+bool test_isotp_single_frame(void);
+bool test_isotp_can_fd_large_single_frame(void);
+bool test_isotp_multi_frame_handshake_and_rollover(void);
+
 // Color codes for ANSI terminal
 #define COLOR_GREEN "\033[0;32m"
 #define COLOR_RED   "\033[0;31m"
@@ -41,6 +45,9 @@ static const TestCase test_registry[] = {
    { "CAN Controller mailbox filters, TEC/REC, and Bus-Off recovery", test_can_controller_filters_and_errors },
    { "Virtual CAN Transceiver priority arbitration & loopback", test_can_transceiver_and_arbitration },
    { "LIN 2.2 PID parity generation and enhanced checksum", test_lin_pid_and_checksum },
+   { "ISO-TP Single Frame (SF) transmission & reassembly", test_isotp_single_frame },
+   { "ISO-TP CAN FD Large Single Frame (SF_DL > 7)", test_isotp_can_fd_large_single_frame },
+   { "ISO-TP Multi-Frame First Frame, Flow Control CTS & CF rollover", test_isotp_multi_frame_handshake_and_rollover },
    { NULL, NULL }
 };
 
