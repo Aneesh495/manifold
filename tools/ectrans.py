@@ -23,43 +23,54 @@ def process_ec_file(filepath):
     # e.g., import "types" -> #include "types.eh"
     content = re.sub(r'^\s*import\s+["<]([^">]+)[">]\s*;', r'#include "\1.eh"', content, flags=re.MULTILINE)
 
-    # Handle PrintLn
-    # PrintLn("Hello, %s", name) -> printf("Hello, %s\n", name)
-    # Handled via macro in runtime/ec_runtime.h
-
     return content
 
 def bundle_directory(src_dirs, output_file, is_test=False):
     """Bundles all .ec and .eh files from directories into an amalgamated C11 translation unit."""
     files_to_process = []
-    for sdir in src_dirs:
-        for root, _, files in os.walk(sdir):
+    runner_file = None
+
+    if is_test:
+        for root, _, files in os.walk("tests"):
             for f in sorted(files):
-                if f.endswith('.ec') or f.endswith('.eh'):
-                    # Skip main.ec, test_runner.ec, bench_runner.ec when bundling libraries
-                    if not is_test and f in ('main.ec', 'test_runner.ec', 'bench_runner.ec', 'DiagTerminal.ec'):
+                if f.endswith('.ec'):
+                    full_path = os.path.join(root, f)
+                    if f == "test_runner.ec":
+                        runner_file = full_path
+                    elif f == "bench_runner.ec":
                         continue
-                    files_to_process.append(os.path.join(root, f))
+                    else:
+                        files_to_process.append(full_path)
+        files_to_process.sort()
+        if runner_file:
+            files_to_process.append(runner_file)
+    else:
+        for sdir in src_dirs:
+            for root, _, files in os.walk(sdir):
+                for f in sorted(files):
+                    if f.endswith('.ec') or f.endswith('.eh'):
+                        if f in ('main.ec', 'test_runner.ec', 'bench_runner.ec', 'DiagTerminal.ec'):
+                            continue
+                        files_to_process.append(os.path.join(root, f))
 
-    # Dependency sort: headers first, then core types, then protocols, then services
-    def sort_key(path):
-        if path.endswith('.eh'):
-            return (0, path)
-        if 'types' in path.lower() or 'core' in path.lower():
-            return (1, path)
-        if 'can' in path.lower() or 'isotp' in path.lower():
-            return (2, path)
-        if 'uds' in path.lower() or 'doip' in path.lower():
-            return (3, path)
-        if 'someip' in path.lower() or 'xcp' in path.lower():
-            return (4, path)
-        if 'secoc' in path.lower() or 'dbc' in path.lower():
-            return (5, path)
-        if 'routing' in path.lower() or 'dtc' in path.lower():
-            return (6, path)
-        return (7, path)
+        def sort_key(path):
+            if path.endswith('.eh'):
+                return (0, path)
+            if 'types' in path.lower() or 'core' in path.lower():
+                return (1, path)
+            if 'can' in path.lower() or 'isotp' in path.lower():
+                return (2, path)
+            if 'uds' in path.lower() or 'doip' in path.lower():
+                return (3, path)
+            if 'someip' in path.lower() or 'xcp' in path.lower():
+                return (4, path)
+            if 'secoc' in path.lower() or 'dbc' in path.lower():
+                return (5, path)
+            if 'routing' in path.lower() or 'dtc' in path.lower():
+                return (6, path)
+            return (7, path)
 
-    files_to_process.sort(key=sort_key)
+        files_to_process.sort(key=sort_key)
 
     os.makedirs(os.path.dirname(os.path.abspath(output_file)), exist_ok=True)
     with open(output_file, 'w', encoding='utf-8') as out:

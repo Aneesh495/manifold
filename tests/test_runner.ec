@@ -23,6 +23,10 @@ bool test_isotp_single_frame(void);
 bool test_isotp_can_fd_large_single_frame(void);
 bool test_isotp_multi_frame_handshake_and_rollover(void);
 
+bool test_dtc_debouncing_and_qualification(void);
+bool test_dtc_uds_service_19_and_14(void);
+bool test_dtc_flash_storage_persistence(void);
+
 // Color codes for ANSI terminal
 #define COLOR_GREEN "\033[0;32m"
 #define COLOR_RED   "\033[0;31m"
@@ -48,6 +52,9 @@ static const TestCase test_registry[] = {
    { "ISO-TP Single Frame (SF) transmission & reassembly", test_isotp_single_frame },
    { "ISO-TP CAN FD Large Single Frame (SF_DL > 7)", test_isotp_can_fd_large_single_frame },
    { "ISO-TP Multi-Frame First Frame, Flow Control CTS & CF rollover", test_isotp_multi_frame_handshake_and_rollover },
+   { "DTC status byte transitions and debounce qualification", test_dtc_debouncing_and_qualification },
+   { "UDS Service 0x19 (ReadDTC) and Service 0x14 (ClearDTC)", test_dtc_uds_service_19_and_14 },
+   { "DTC non-volatile wear-leveling flash persistence", test_dtc_flash_storage_persistence },
    { NULL, NULL }
 };
 

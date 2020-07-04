@@ -139,6 +139,7 @@ uint32_t uds_handle_transfer_data(UdsServer* server, const uint8_t* req, uint32_
 uint32_t uds_handle_transfer_exit(UdsServer* server, const uint8_t* req, uint32_t reqLen, uint8_t* resp, uint32_t maxRespLen)
 {
    (void)req;
+   (void)reqLen;
    if(!server || !resp) return 0;
 
    if(!server->transferActive)
