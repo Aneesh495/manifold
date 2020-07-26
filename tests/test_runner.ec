@@ -27,6 +27,11 @@ bool test_dtc_debouncing_and_qualification(void);
 bool test_dtc_uds_service_19_and_14(void);
 bool test_dtc_flash_storage_persistence(void);
 
+bool test_doip_header_codec_and_nack(void);
+bool test_doip_vehicle_discovery(void);
+bool test_doip_routing_activation_and_alive_check(void);
+bool test_doip_diagnostic_message_routing(void);
+
 // Color codes for ANSI terminal
 #define COLOR_GREEN "\033[0;32m"
 #define COLOR_RED   "\033[0;31m"
@@ -55,6 +60,10 @@ static const TestCase test_registry[] = {
    { "DTC status byte transitions and debounce qualification", test_dtc_debouncing_and_qualification },
    { "UDS Service 0x19 (ReadDTC) and Service 0x14 (ClearDTC)", test_dtc_uds_service_19_and_14 },
    { "DTC non-volatile wear-leveling flash persistence", test_dtc_flash_storage_persistence },
+   { "DoIP Generic Header encoding, decoding & pattern NACK", test_doip_header_codec_and_nack },
+   { "DoIP Vehicle Announcement and EID/VIN discovery filtering", test_doip_vehicle_discovery },
+   { "DoIP Routing Activation handshake and alive check watchdog", test_doip_routing_activation_and_alive_check },
+   { "DoIP Diagnostic Message encapsulation and logical routing", test_doip_diagnostic_message_routing },
    { NULL, NULL }
 };
 
