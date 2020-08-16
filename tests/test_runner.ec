@@ -32,6 +32,10 @@ bool test_doip_vehicle_discovery(void);
 bool test_doip_routing_activation_and_alive_check(void);
 bool test_doip_diagnostic_message_routing(void);
 
+bool test_someip_header_and_payload_serialization(void);
+bool test_someip_service_discovery_offers_and_queries(void);
+bool test_someip_rpc_dispatching_and_notifications(void);
+
 // Color codes for ANSI terminal
 #define COLOR_GREEN "\033[0;32m"
 #define COLOR_RED   "\033[0;31m"
@@ -64,6 +68,9 @@ static const TestCase test_registry[] = {
    { "DoIP Vehicle Announcement and EID/VIN discovery filtering", test_doip_vehicle_discovery },
    { "DoIP Routing Activation handshake and alive check watchdog", test_doip_routing_activation_and_alive_check },
    { "DoIP Diagnostic Message encapsulation and logical routing", test_doip_diagnostic_message_routing },
+   { "SOME/IP Header framing, byte swapping, and type-safe serializer", test_someip_header_and_payload_serialization },
+   { "SOME/IP-SD Offer Service, Find Service, and Eventgroup subscription", test_someip_service_discovery_offers_and_queries },
+   { "SOME/IP RPC method dispatching and event notification publish", test_someip_rpc_dispatching_and_notifications },
    { NULL, NULL }
 };
 
