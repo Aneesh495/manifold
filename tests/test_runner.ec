@@ -36,6 +36,11 @@ bool test_someip_header_and_payload_serialization(void);
 bool test_someip_service_discovery_offers_and_queries(void);
 bool test_someip_rpc_dispatching_and_notifications(void);
 
+bool test_xcp_connect_status_and_id(void);
+bool test_xcp_memory_upload_download_and_checksum(void);
+bool test_xcp_cal_page_switching_and_copy(void);
+bool test_xcp_dynamic_daq_allocation_and_streaming(void);
+
 // Color codes for ANSI terminal
 #define COLOR_GREEN "\033[0;32m"
 #define COLOR_RED   "\033[0;31m"
@@ -71,6 +76,10 @@ static const TestCase test_registry[] = {
    { "SOME/IP Header framing, byte swapping, and type-safe serializer", test_someip_header_and_payload_serialization },
    { "SOME/IP-SD Offer Service, Find Service, and Eventgroup subscription", test_someip_service_discovery_offers_and_queries },
    { "SOME/IP RPC method dispatching and event notification publish", test_someip_rpc_dispatching_and_notifications },
+   { "XCP CONNECT, DISCONNECT, GET_STATUS, and GET_ID state machine", test_xcp_connect_status_and_id },
+   { "XCP Memory MTA navigation, UPLOAD, DOWNLOAD, and CHECKSUM", test_xcp_memory_upload_download_and_checksum },
+   { "XCP Calibration Page switching, ECU execution mapping & mirroring", test_xcp_cal_page_switching_and_copy },
+   { "XCP Dynamic DAQ/ODT allocation and microsecond timestamp streaming", test_xcp_dynamic_daq_allocation_and_streaming },
    { NULL, NULL }
 };
 
