@@ -32,5 +32,8 @@ bool secoc_generate_mac(const SecOcConfig* config, const uint8_t* data, uint32_t
                         uint64_t freshness, uint8_t* outMac);
 bool secoc_verify_mac(const SecOcConfig* config, const uint8_t* data, uint32_t dataLen,
                       uint64_t freshness, const uint8_t* mac);
+bool secoc_secure_pdu(const SecOcConfig* config, const uint8_t* inData, uint32_t inLen,
+                      uint64_t freshness, SecOcPdu* outPdu);
+bool secoc_verify_pdu(const SecOcConfig* config, const SecOcPdu* inPdu);
 
 #endif // MANIFOLD_SECOC_EH
