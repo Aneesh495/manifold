@@ -41,6 +41,11 @@ bool test_xcp_memory_upload_download_and_checksum(void);
 bool test_xcp_cal_page_switching_and_copy(void);
 bool test_xcp_dynamic_daq_allocation_and_streaming(void);
 
+bool test_gateway_routing_rules_and_translation(void);
+bool test_traffic_shaper_burst_and_priority_egress(void);
+bool test_dbc_signal_codec_intel_and_motorola(void);
+bool test_cross_domain_can_someip_bridge_with_secoc(void);
+
 // Color codes for ANSI terminal
 #define COLOR_GREEN "\033[0;32m"
 #define COLOR_RED   "\033[0;31m"
@@ -80,6 +85,10 @@ static const TestCase test_registry[] = {
    { "XCP Memory MTA navigation, UPLOAD, DOWNLOAD, and CHECKSUM", test_xcp_memory_upload_download_and_checksum },
    { "XCP Calibration Page switching, ECU execution mapping & mirroring", test_xcp_cal_page_switching_and_copy },
    { "XCP Dynamic DAQ/ODT allocation and microsecond timestamp streaming", test_xcp_dynamic_daq_allocation_and_streaming },
+   { "Gateway multi-bus routing rules, frame translation, and filtering", test_gateway_routing_rules_and_translation },
+   { "Traffic shaper token bucket rate limiting and priority egress queue", test_traffic_shaper_burst_and_priority_egress },
+   { "DBC signal bitfield encoding/decoding (Intel/Motorola & physical scaling)", test_dbc_signal_codec_intel_and_motorola },
+   { "Cross-domain CAN FD to SOME/IP bridge with SecOC MAC authentication", test_cross_domain_can_someip_bridge_with_secoc },
    { NULL, NULL }
 };
 
