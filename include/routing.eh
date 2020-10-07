@@ -82,6 +82,30 @@ typedef struct CanSomeipBridge
    uint8_t interfaceVersion;
 } CanSomeipBridge;
 
+// Virtual Vehicle Simulator
+typedef struct VehicleSimulator
+{
+   uint64_t simulatedTimeMs;
+   uint32_t stepCount;
+   double engineRpm;
+   double vehicleSpeedKph;
+   double coolantTempC;
+   double throttlePercent;
+   double steeringAngleDeg;
+   bool brakeActive;
+
+   RoutingTable routingTable;
+   TokenBucket powertrainShaper;
+   CanSomeipBridge powertrainBridge;
+   uint8_t secocKey[16];
+   uint64_t secocFreshness;
+
+   uint64_t framesRoutedPowertrain;
+   uint64_t framesRoutedChassis;
+   uint64_t framesRoutedBody;
+   uint64_t someipMessagesPublished;
+} VehicleSimulator;
+
 // Function Prototypes
 
 // Routing Table (RoutingTable.ec)
