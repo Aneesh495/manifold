@@ -46,6 +46,18 @@ bool test_traffic_shaper_burst_and_priority_egress(void);
 bool test_dbc_signal_codec_intel_and_motorola(void);
 bool test_cross_domain_can_someip_bridge_with_secoc(void);
 
+// Regression & Fuzzing test suites
+bool test_can_fd_stuff_bit_edge_cases(void);
+bool test_isotp_zero_length_and_wrap(void);
+bool test_uds_security_lockout_and_seed_expiration(void);
+bool test_doip_socket_flood_and_nack(void);
+bool test_xcp_boundary_violations(void);
+bool test_secoc_freshness_rollover(void);
+bool test_dtc_and_did_catalogs(void);
+bool test_fuzz_can_fd_crc_robustness(void);
+bool test_fuzz_someip_deserializer_robustness(void);
+bool test_fuzz_doip_header_robustness(void);
+
 // Color codes for ANSI terminal
 #define COLOR_GREEN "\033[0;32m"
 #define COLOR_RED   "\033[0;31m"
@@ -89,6 +101,16 @@ static const TestCase test_registry[] = {
    { "Traffic shaper token bucket rate limiting and priority egress queue", test_traffic_shaper_burst_and_priority_egress },
    { "DBC signal bitfield encoding/decoding (Intel/Motorola & physical scaling)", test_dbc_signal_codec_intel_and_motorola },
    { "Cross-domain CAN FD to SOME/IP bridge with SecOC MAC authentication", test_cross_domain_can_someip_bridge_with_secoc },
+   { "Regression: CAN FD 29-bit identifier and stuff bit bounds", test_can_fd_stuff_bit_edge_cases },
+   { "Regression: ISO-TP zero-length reject and FC overflow abort", test_isotp_zero_length_and_wrap },
+   { "Regression: UDS Security Access brute-force lockout threshold", test_uds_security_lockout_and_seed_expiration },
+   { "Regression: DoIP concurrent socket limit and NACK recovery", test_doip_socket_flood_and_nack },
+   { "Regression: XCP MTA boundary violations and checksum overflow", test_xcp_boundary_violations },
+   { "Regression: SecOC monotonic freshness rollover and verification", test_secoc_freshness_rollover },
+   { "Catalog: Diagnostic Trouble Code (DTC) and UDS DID query resolution", test_dtc_and_did_catalogs },
+   { "Fuzzing: CAN FD CRC-17 and CRC-21 randomized bit corruption", test_fuzz_can_fd_crc_robustness },
+   { "Fuzzing: SOME/IP deserializer randomized corrupt payload safety", test_fuzz_someip_deserializer_robustness },
+   { "Fuzzing: DoIP generic header parser randomized payload safety", test_fuzz_doip_header_robustness },
    { NULL, NULL }
 };
 

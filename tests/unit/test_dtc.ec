@@ -13,11 +13,6 @@
 #include "ec_runtime.h"
 
 // Forward declarations of DTC and UDS components
-void fault_manager_init(FaultManager* mgr);
-DtcEntry* fault_manager_add_dtc(FaultManager* mgr, DtcCode code, int16_t failThreshold, int16_t passThreshold);
-bool fault_manager_report_test_result(FaultManager* mgr, DtcCode code, bool isFailed);
-void fault_manager_start_operation_cycle(FaultManager* mgr);
-
 void freeze_frame_set_telemetry(double speed, double rpm, double battery, double coolant);
 uint32_t freeze_frame_serialize(const FreezeFrame* ff, uint8_t* outBuf, uint32_t maxLen);
 

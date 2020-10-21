@@ -1,0 +1,75 @@
+VERSION ""
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: Gateway ADAS Radar Camera Lidar Planning
+
+BO_ 512 ADAS_FrontRadar_Target01: 16 Radar
+ SG_ Target01_Range : 0|16@1+ (0.01,0) [0|250] "m" Gateway,Planning
+ SG_ Target01_Azimuth : 16|16@1- (0.01,0) [-90|90] "deg" Gateway,Planning
+ SG_ Target01_RelSpeed : 32|16@1- (0.01,0) [-100|100] "m/s" Gateway,Planning
+ SG_ Target01_Confidence : 48|8@1+ (1,0) [0|100] "%" Gateway,Planning
+ SG_ Target01_Class : 56|4@1+ (1,0) [0|15] "" Gateway,Planning
+
+BO_ 513 ADAS_FrontRadar_Target02: 16 Radar
+ SG_ Target02_Range : 0|16@1+ (0.01,0) [0|250] "m" Gateway,Planning
+ SG_ Target02_Azimuth : 16|16@1- (0.01,0) [-90|90] "deg" Gateway,Planning
+ SG_ Target02_RelSpeed : 32|16@1- (0.01,0) [-100|100] "m/s" Gateway,Planning
+ SG_ Target02_Confidence : 48|8@1+ (1,0) [0|100] "%" Gateway,Planning
+ SG_ Target02_Class : 56|4@1+ (1,0) [0|15] "" Gateway,Planning
+
+BO_ 514 ADAS_FrontRadar_Target03: 16 Radar
+ SG_ Target03_Range : 0|16@1+ (0.01,0) [0|250] "m" Gateway,Planning
+ SG_ Target03_Azimuth : 16|16@1- (0.01,0) [-90|90] "deg" Gateway,Planning
+ SG_ Target03_RelSpeed : 32|16@1- (0.01,0) [-100|100] "m/s" Gateway,Planning
+ SG_ Target03_Confidence : 48|8@1+ (1,0) [0|100] "%" Gateway,Planning
+ SG_ Target03_Class : 56|4@1+ (1,0) [0|15] "" Gateway,Planning
+
+BO_ 528 ADAS_LaneDetection: 16 Camera
+ SG_ LeftLaneDistance : 0|16@1- (0.005,0) [-10|10] "m" Gateway,Planning
+ SG_ LeftLaneCurvature : 16|16@1- (0.0001,0) [-0.1|0.1] "1/m" Gateway,Planning
+ SG_ RightLaneDistance : 32|16@1- (0.005,0) [-10|10] "m" Gateway,Planning
+ SG_ RightLaneCurvature : 48|16@1- (0.0001,0) [-0.1|0.1] "1/m" Gateway,Planning
+ SG_ LeftLaneConfidence : 64|8@1+ (1,0) [0|100] "%" Gateway,Planning
+ SG_ RightLaneConfidence : 72|8@1+ (1,0) [0|100] "%" Gateway,Planning
+
+BO_ 544 ADAS_TrajectoryCommand: 16 Planning
+ SG_ TargetLongitudinalAccel : 0|16@1- (0.01,0) [-15|10] "m/s2" Gateway,ESC
+ SG_ TargetSteeringAngle : 16|16@1- (0.1,0) [-720|720] "deg" Gateway,EPS
+ SG_ EmergencyBrakingReq : 32|1@1+ (1,0) [0|1] "" Gateway,ESC
+ SG_ LaneKeepAssistActive : 33|1@1+ (1,0) [0|1] "" Gateway,EPS
+ SG_ AdaptiveCruiseControlState : 34|3@1+ (1,0) [0|7] "" Gateway,Cluster
+
+CM_ BO_ 512 "Long-range forward radar primary tracked object broadcast at 20ms.";
+CM_ BO_ 528 "Frontal vision camera lane marker detection and road curvature.";
+CM_ BO_ 544 "Trajectory planning actuation request forwarded by gateway to ESC and EPS.";

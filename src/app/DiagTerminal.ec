@@ -21,9 +21,6 @@
 
 // Forward declarations from DTC and UDS subsystems
 FaultManager* uds_get_fault_manager(void);
-void fault_manager_init(FaultManager* mgr);
-DtcEntry* fault_manager_add_dtc(FaultManager* mgr, uint32_t code, int8_t failStep, int8_t passStep);
-void fault_manager_report_test_result(FaultManager* mgr, uint32_t code, bool failed);
 
 #define COLOR_GREEN "\033[0;32m"
 #define COLOR_RED   "\033[0;31m"

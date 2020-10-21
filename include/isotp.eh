@@ -79,5 +79,8 @@ void isotp_channel_init(IsoTpChannel* chan, const IsoTpConfig* config);
 bool isotp_transmit(IsoTpChannel* chan, const uint8_t* payload, uint32_t length);
 bool isotp_receive_can_frame(IsoTpChannel* chan, const CanFrame* frame, uint8_t* outMsg, uint32_t* outLen);
 bool isotp_poll_transmit(IsoTpChannel* chan, CanFrame* outFrame, bool* frameReady);
+bool isotp_tx_start(IsoTpChannel* chan, const uint8_t* payload, uint32_t length);
+bool isotp_tx_poll(IsoTpChannel* chan, uint64_t currentMs, CanFrame* outFrame, bool* frameReady);
+bool isotp_fc_process(IsoTpChannel* chan, IsoTpFlowStatus fs, uint8_t bs, uint8_t stMin);
 
 #endif // MANIFOLD_ISOTP_EH

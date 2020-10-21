@@ -71,7 +71,7 @@ $(OBJ_DIR)/src/DiagTerminal.o: src/app/DiagTerminal.ec
 	@$(ECTRANS) -i $< -o $(OBJ_DIR)/src/DiagTerminal.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $(OBJ_DIR)/src/DiagTerminal.c -o $@
 
-$(OBJ_DIR)/tests/test_runner.o: tests/test_runner.ec
+$(OBJ_DIR)/tests/test_runner.o: $(EC_SRCS)
 	@$(ECTRANS) --bundle-tests -o $(OBJ_DIR)/tests/test_runner.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $(OBJ_DIR)/tests/test_runner.c -o $@
 

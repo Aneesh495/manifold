@@ -71,4 +71,18 @@ void uds_server_init(UdsServer* server);
 void uds_server_process_request(UdsServer* server, const uint8_t* req, uint32_t reqLen,
                                 uint8_t* resp, uint32_t* respLen);
 
+typedef struct UdsDidDefinition
+{
+   uint16_t did;
+   const char* name;
+   uint16_t length;
+   bool isWritable;
+   uint8_t readSecurityLevel;
+   uint8_t writeSecurityLevel;
+   const char* defaultPayload;
+} UdsDidDefinition;
+
+const UdsDidDefinition* uds_did_catalog_lookup(uint16_t did);
+bool uds_did_catalog_read(uint16_t did, uint8_t* outBuf, uint32_t* outLen, uint32_t maxLen);
+
 #endif // MANIFOLD_UDS_EH

@@ -1,0 +1,129 @@
+VERSION ""
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: Gateway BMS Inverter Charger Thermal Gateway
+
+BO_ 1024 BMS_PackStatus: 16 BMS
+ SG_ PackVoltage : 0|16@1+ (0.1,0) [0|1000] "V" Gateway,Inverter
+ SG_ PackCurrent : 16|16@1- (0.1,0) [-1000|1000] "A" Gateway,Inverter
+ SG_ StateOfCharge : 32|16@1+ (0.01,0) [0|100] "%" Gateway,Cluster
+ SG_ StateOfHealth : 48|16@1+ (0.01,0) [0|100] "%" Gateway,Cluster
+ SG_ IsolationResistance : 64|16@1+ (1,0) [0|65535] "kOhm" Gateway
+ SG_ MainPositiveContactor : 80|2@1+ (1,0) [0|3] "" Gateway
+ SG_ MainNegativeContactor : 82|2@1+ (1,0) [0|3] "" Gateway
+ SG_ PrechargeContactor : 84|2@1+ (1,0) [0|3] "" Gateway
+
+BO_ 1025 BMS_Limits: 16 BMS
+ SG_ MaxChargeCurrent : 0|16@1+ (0.1,0) [0|1000] "A" Gateway,Charger
+ SG_ MaxDischargeCurrent : 16|16@1+ (0.1,0) [0|1000] "A" Gateway,Inverter
+ SG_ MaxRegenCurrent : 32|16@1+ (0.1,0) [0|1000] "A" Gateway,Inverter
+ SG_ PackMaxTemperature : 48|8@1+ (1,-40) [-40|150] "degC" Gateway,Thermal
+ SG_ PackMinTemperature : 56|8@1+ (1,-40) [-40|150] "degC" Gateway,Thermal
+ SG_ PackAvgTemperature : 64|8@1+ (1,-40) [-40|150] "degC" Gateway,Thermal
+
+BO_ 1040 BMS_CellVoltages_01_04: 16 BMS
+ SG_ Cell001_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell002_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell003_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell004_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1041 BMS_CellVoltages_05_08: 16 BMS
+ SG_ Cell005_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell006_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell007_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell008_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1042 BMS_CellVoltages_09_12: 16 BMS
+ SG_ Cell009_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell010_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell011_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell012_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1043 BMS_CellVoltages_13_16: 16 BMS
+ SG_ Cell013_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell014_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell015_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell016_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1044 BMS_CellVoltages_17_20: 16 BMS
+ SG_ Cell017_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell018_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell019_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell020_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1045 BMS_CellVoltages_21_24: 16 BMS
+ SG_ Cell021_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell022_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell023_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell024_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1046 BMS_CellVoltages_25_28: 16 BMS
+ SG_ Cell025_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell026_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell027_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell028_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1047 BMS_CellVoltages_29_32: 16 BMS
+ SG_ Cell029_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell030_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell031_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell032_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1048 BMS_CellVoltages_33_36: 16 BMS
+ SG_ Cell033_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell034_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell035_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell036_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1049 BMS_CellVoltages_37_40: 16 BMS
+ SG_ Cell037_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell038_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell039_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell040_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1050 BMS_CellVoltages_41_44: 16 BMS
+ SG_ Cell041_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell042_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell043_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell044_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+BO_ 1051 BMS_CellVoltages_45_48: 16 BMS
+ SG_ Cell045_Voltage : 0|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell046_Voltage : 16|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell047_Voltage : 32|16@1+ (0.001,0) [0|5] "V" Gateway
+ SG_ Cell048_Voltage : 48|16@1+ (0.001,0) [0|5] "V" Gateway
+
+CM_ BO_ 1024 "Battery management system total pack voltage, current, and state of charge.";
+CM_ BO_ 1025 "Dynamic charge and discharge current limits computed by BMS.";
+CM_ BO_ 1040 "Individual lithium-ion cell voltages for pack cells 1 through 4.";

@@ -44,4 +44,13 @@ typedef struct FaultManager
    uint32_t count;
 } FaultManager;
 
+void fault_manager_init(FaultManager* mgr);
+DtcEntry* fault_manager_add_dtc(FaultManager* mgr, DtcCode code, int16_t failThreshold, int16_t passThreshold);
+DtcEntry* fault_manager_find_dtc(FaultManager* mgr, DtcCode code);
+bool fault_manager_report_test_result(FaultManager* mgr, DtcCode code, bool isFailed);
+void fault_manager_start_operation_cycle(FaultManager* mgr);
+
+const char* dtc_catalog_lookup_description(uint32_t code);
+void dtc_catalog_populate_manager(FaultManager* mgr);
+
 #endif // MANIFOLD_DTC_EH
