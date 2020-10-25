@@ -16,7 +16,7 @@ The project employs a three-tier verification harness executed under strict comp
 
 ## 2. Test Execution & Coverage Summary
 
-Executing `make test` runs the comprehensive 29-test verification suite:
+Executing `make test` runs the comprehensive 39-test verification suite:
 
 ```
 ================================================================
@@ -51,8 +51,18 @@ Executing `make test` runs the comprehensive 29-test verification suite:
   [RUN ] Traffic shaper token bucket rate limiting and priority egress queue ... [PASS]
   [RUN ] DBC signal bitfield encoding/decoding (Intel/Motorola & physical scaling) ... [PASS]
   [RUN ] Cross-domain CAN FD to SOME/IP bridge with SecOC MAC authentication ... [PASS]
+  [RUN ] Regression: CAN FD 29-bit identifier and stuff bit bounds ... [PASS]
+  [RUN ] Regression: ISO-TP zero-length reject and FC overflow abort ... [PASS]
+  [RUN ] Regression: UDS Security Access brute-force lockout threshold ... [PASS]
+  [RUN ] Regression: DoIP concurrent socket limit and NACK recovery ... [PASS]
+  [RUN ] Regression: XCP MTA boundary violations and checksum overflow ... [PASS]
+  [RUN ] Regression: SecOC monotonic freshness rollover and verification ... [PASS]
+  [RUN ] Catalog: Diagnostic Trouble Code (DTC) and UDS DID query resolution ... [PASS]
+  [RUN ] Fuzzing: CAN FD CRC-17 and CRC-21 randomized bit corruption ... [PASS]
+  [RUN ] Fuzzing: SOME/IP deserializer randomized corrupt payload safety ... [PASS]
+  [RUN ] Fuzzing: DoIP generic header parser randomized payload safety ... [PASS]
 ----------------------------------------------------------------
-Test Results: 29 passed, 0 failed in 1.26 ms
+Test Results: 39 passed, 0 failed in 2.40 ms
 ================================================================
 ```
 
@@ -68,18 +78,18 @@ Executing `make bench` runs the hardware-accelerated benchmark suite:
 ========================================================================================
   Benchmark Subsystem                Iterations   Elapsed Time         Throughput
   --------------------------------------------------------------------------------------
-  CAN FD CRC-21 Engine                   500000      707.88 ms       0.71 Mops/s (  43.1 MB/s)
-  SecOC AES-128 CMAC Signatures           50000      498.31 ms     100.34 Kops/s
-  Gateway Bitmask Route Match           1000000       51.58 ms      19.39 Mops/s
-  SOME/IP Type-Safe Serialization        500000       22.10 ms      22.63 Mops/s
+  CAN FD CRC-21 Engine                   500000      691.21 ms       0.72 Mops/s (  44.2 MB/s)
+  SecOC AES-128 CMAC Signatures           50000      377.88 ms     132.32 Kops/s
+  Gateway Bitmask Route Match           1000000       45.05 ms      22.20 Mops/s
+  SOME/IP Type-Safe Serialization        500000       17.96 ms      27.84 Mops/s
 ========================================================================================
 ```
 
 ### Key Performance Highlights:
-- **Routing Decision Throughput**: 19.39 million route decisions per second (<52 nanoseconds per packet).
-- **SOME/IP Serialization**: 22.63 million serializations per second (<45 nanoseconds per packet).
-- **SecOC Cryptographic Throughput**: 100,340 AES-128 CMAC signatures per second on bare metal.
-- **CAN FD CRC-21 Calculation**: 43.1 MB/s throughput with Gray code stuff bit tracking.
+- **Routing Decision Throughput**: 22.20 million route decisions per second (<46 nanoseconds per packet).
+- **SOME/IP Serialization**: 27.84 million serializations per second (<36 nanoseconds per packet).
+- **SecOC Cryptographic Throughput**: 132,320 AES-128 CMAC signatures per second on bare metal.
+- **CAN FD CRC-21 Calculation**: 44.2 MB/s throughput with Gray code stuff bit tracking.
 
 ---
 
@@ -95,7 +105,7 @@ cd manifold
 # Build all binaries (daemon, terminal, test suite, benchmark harness)
 make all
 
-# Run complete 29-test verification suite
+# Run complete 39-test verification suite
 make test
 
 # Run performance benchmarks

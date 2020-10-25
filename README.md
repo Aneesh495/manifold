@@ -151,7 +151,7 @@ A standard C toolchain (`clang` or `gcc`), GNU `make` or `cmake`, and `python3`.
 # Build all project targets (daemon, terminal, test suite, benchmark)
 make all
 
-# Run complete 29-test verification suite (all passing)
+# Run complete 39-test verification suite (all passing)
 make test
 
 # Run high-throughput performance benchmark harness
